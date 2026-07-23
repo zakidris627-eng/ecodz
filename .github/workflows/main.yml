@@ -14,11 +14,17 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.0'
+          flutter-version: '3.22.0'
           channel: 'stable'
+
+      - name: Enable Linux desktop (to fix platform issues)
+        run: flutter config --enable-linux-desktop
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Analyze code (to catch errors early)
+        run: flutter analyze
 
       - name: Build APK
         run: flutter build apk --release
